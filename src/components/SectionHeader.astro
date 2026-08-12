@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  badge?: string;
+  linkHref?: string;
+  linkLabel?: string;
+}
+
+const { title, subtitle, badge, linkHref, linkLabel = "Lihat semua →" } = Astro.props;
+---
+
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+  <div>
+    {badge && (
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-2">
+        {badge}
+      </span>
+    )}
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-text-heading">
+      {title}
+    </h2>
+    {subtitle && (
+      <p class="text-text-muted text-sm sm:text-base mt-1 max-w-xl">
+        {subtitle}
+      </p>
+    )}
+  </div>
+  {linkHref && (
+    <a
+      href={linkHref}
+      class="inline-flex items-center gap-1.5 text-sm font-medium text-brand-400 hover:text-brand-300 transition-colors group self-start md:self-auto"
+    >
+      <span>{linkLabel}</span>
+      <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </a>
+  )}
+</div>

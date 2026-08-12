@@ -1,0 +1,130 @@
+---
+import HomeIcon from './icons/HomeIcon.astro';
+import UserIcon from './icons/UserIcon.astro';
+import MonitorIcon from './icons/MonitorIcon.astro';
+import CameraIcon from './icons/CameraIcon.astro';
+import MoonIcon from './icons/MoonIcon.astro';
+import BookOpenIcon from './icons/BookOpenIcon.astro';
+
+interface Props {
+  active?: 'home' | 'user' | 'projects' | 'blog' | 'photos';
+}
+
+const { active } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const getActiveItem = () => {
+  if (active) return active;
+  if (pathname === '/about' || pathname === '/profile') return 'user';
+  if (pathname === '/projects' || pathname === '/work') return 'projects';
+  if (pathname === '/blog' || pathname.startsWith('/blog')) return 'blog';
+  if (pathname === '/photos' || pathname === '/gallery') return 'photos';
+  if (pathname === '/' || pathname === '/home') return 'home';
+  return 'home';
+};
+
+const currentActive = getActiveItem();
+
+const navItems = [
+  {
+    id: 'home',
+    label: 'Home',
+    href: '/',
+    IconComponent: HomeIcon
+  },
+  {
+    id: 'user',
+    label: 'Profile',
+    href: '/about',
+    IconComponent: UserIcon
+  },
+  {
+    id: 'projects',
+    label: 'Projects',
+    href: '/projects',
+    IconComponent: MonitorIcon
+  },
+  {
+    id: 'blog',
+    label: 'Blog',
+    href: '/blog',
+    IconComponent: BookOpenIcon
+  },
+  {
+    id: 'photos',
+    label: 'Photos',
+    href: '/photos',
+    IconComponent: CameraIcon
+  }
+];
+---
+
+<!-- Mobile Theme Toggle (Top Right on mobile) -->
+<button
+  id="theme-toggle-mobile"
+  aria-label="Toggle theme"
+  class="md:hidden fixed top-5 right-5 z-50 p-2.5 rounded-xl text-neutral-400 hover:text-neutral-100 transition-colors duration-200 focus:outline-none"
+>
+  <MoonIcon width={20} height={20} />
+</button>
+
+<!-- Navigation Container -->
+<nav
+  aria-label="Main Navigation"
+  class="fixed top-5 left-1/2 -translate-x-1/2 z-50 md:left-6 md:top-1/2 md:-translate-y-1/2 md:translate-x-0"
+>
+  <div class="bg-bg-elevated/90 backdrop-blur-md border border-border-subtle shadow-xl rounded-2xl p-1.5 flex items-center gap-1.5 md:flex-col md:p-2 md:gap-2.5">
+    {navItems.map((item) => {
+      const isActive = currentActive === item.id;
+      const Icon = item.IconComponent;
+      return (
+        <a
+          href={item.href}
+          aria-label={item.label}
+          title={item.label}
+          class:list={[
+            "p-2.5 rounded-xl flex items-center justify-center transition-all duration-200 group relative",
+            isActive
+              ? "bg-base-white text-base-black shadow-md font-semibold scale-105"
+              : "text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/40"
+          ]}
+        >
+          <Icon width={20} height={20} />
+          <span class="sr-only">{item.label}</span>
+        </a>
+      );
+    })}
+
+  </div>
+
+  <div class="hidden md:flex bg-bg-elevated/90 backdrop-blur-md border border-border-subtle shadow-2xl rounded-2xl p-1.5 items-center gap-1.5 md:flex-col md:p-2 md:gap-2.5 my-2">
+
+    <!-- Desktop Theme Toggle (Bottom of stack on desktop) -->
+    <button
+      id="theme-toggle-desktop"
+      aria-label="Toggle theme"
+      class="p-2.5 rounded-xl text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/40 transition-colors duration-200 focus:outline-none mt-1"
+    >
+      <MoonIcon width={20} height={20} />
+    </button>
+  </div>
+</nav>
+
+<script>
+  function setupThemeToggle() {
+    const toggleMobile = document.getElementById('theme-toggle-mobile');
+    const toggleDesktop = document.getElementById('theme-toggle-desktop');
+
+    const toggleTheme = () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+
+    toggleMobile?.addEventListener('click', toggleTheme);
+    toggleDesktop?.addEventListener('click', toggleTheme);
+  }
+
+  setupThemeToggle();
+  document.addEventListener('astro:after-swap', setupThemeToggle);
+</script>

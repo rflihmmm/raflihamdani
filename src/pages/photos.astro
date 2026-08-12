@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const photoGallery = [
+  {
+    id: "photo-1",
+    title: "Geometry in Motion",
+    category: "Arsitektur",
+    location: "Jakarta Financial Center",
+    camera: "Sony A7 IV • 35mm f/1.8",
+    aspect: "h-72",
+    gradient: "from-slate-900 via-indigo-950 to-slate-900",
+    accent: "border-indigo-500/30"
+  },
+  {
+    id: "photo-2",
+    title: "Bandung Misty Morning",
+    category: "Landscape",
+    location: "Lembang Highlands",
+    camera: "Fujifilm X-T4 • 50mm f/2.0",
+    aspect: "h-96",
+    gradient: "from-emerald-950 via-teal-950 to-slate-900",
+    accent: "border-emerald-500/30"
+  },
+  {
+    id: "photo-3",
+    title: "Midnight Neon Reflection",
+    category: "Urban",
+    location: "Sudirman Pedestrian Alley",
+    camera: "Sony A7 IV • 85mm f/1.4",
+    aspect: "h-72",
+    gradient: "from-purple-950 via-pink-950 to-slate-900",
+    accent: "border-purple-500/30"
+  },
+  {
+    id: "photo-4",
+    title: "Golden Hour Waves",
+    category: "Landscape",
+    location: "Uluwatu Cliffs, Bali",
+    camera: "Canon R6 • 24-70mm f/2.8",
+    aspect: "h-80",
+    gradient: "from-amber-950 via-orange-950 to-slate-900",
+    accent: "border-amber-500/30"
+  },
+  {
+    id: "photo-5",
+    title: "Symmetry of Modern Glass",
+    category: "Arsitektur",
+    location: "Menara BCA Tower",
+    camera: "Fujifilm X-T4 • 16mm f/2.8",
+    aspect: "h-80",
+    gradient: "from-cyan-950 via-blue-950 to-slate-900",
+    accent: "border-cyan-500/30"
+  },
+  {
+    id: "photo-6",
+    title: "Solitude in the Forest",
+    category: "Minimalis",
+    location: "Cikole Pine Forest",
+    camera: "Sony A7 IV • 50mm f/1.4",
+    aspect: "h-72",
+    gradient: "from-stone-900 via-zinc-900 to-slate-900",
+    accent: "border-stone-500/30"
+  }
+];
+
+const categories = ["Semua", "Arsitektur", "Landscape", "Urban", "Minimalis"];
+---
+
+<Layout title="Photos — Rafli Hamdani" activeNav="photos">
+  <div class="mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4">
+      📷 Galeri Fotografi
+    </div>
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-heading mb-4">
+      Koleksi Foto & Momen
+    </h1>
+    <p class="text-text-muted text-lg leading-relaxed max-w-2xl">
+      Eksplorasi estetika visual, pola arsitektur perkotaan, lanskap alam, dan cuplikan perspektif fotografi.
+    </p>
+  </div>
+
+  <!-- CATEGORY FILTER BUTTONS -->
+  <div class="flex flex-wrap gap-2 mb-10">
+    {categories.map((cat, idx) => (
+      <button
+        type="button"
+        class:list={[
+          "px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border cursor-pointer",
+          idx === 0 
+            ? "bg-brand-500 text-white border-brand-500 shadow-md shadow-brand-500/20"
+            : "bg-bg-surface border-border-subtle text-text-muted hover:text-text-heading hover:bg-bg-elevated"
+        ]}
+      >
+        {cat}
+      </button>
+    ))}
+  </div>
+
+  <!-- GALLERY GRID -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {photoGallery.map((photo) => (
+      <div
+        class:list={[
+          "group relative rounded-2xl overflow-hidden border bg-bg-surface flex flex-col justify-end p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer",
+          photo.aspect,
+          photo.accent
+        ]}
+        data-lightbox={photo.title}
+      >
+        <!-- Background Mock Visual -->
+        <div class={`absolute inset-0 bg-gradient-to-br ${photo.gradient} opacity-90 group-hover:scale-110 transition-transform duration-700`}></div>
+        
+        <!-- Grid Pattern Overlay -->
+        <div class="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] opacity-10"></div>
+        
+        <!-- Bottom Vignette -->
+        <div class="absolute inset-0 bg-gradient-to-t from-bg-page via-bg-page/40 to-transparent"></div>
+
+        <!-- Photo Metadata Overlay -->
+        <div class="relative z-10">
+          <span class="inline-block px-2.5 py-0.5 rounded-full bg-brand-500/20 text-brand-300 text-[11px] font-mono font-medium mb-2 border border-brand-500/30">
+            {photo.category}
+          </span>
+          
+          <h3 class="text-xl font-bold text-white group-hover:text-brand-300 transition-colors mb-1">
+            {photo.title}
+          </h3>
+
+          <div class="space-y-1 text-xs text-neutral-300">
+            <p class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              {photo.location}
+            </p>
+            <p class="flex items-center gap-1.5 font-mono text-[11px] text-neutral-400">
+              <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h0.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <circle cx="12" cy="13" r="3" stroke-width="2" />
+              </svg>
+              {photo.camera}
+            </p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- LIGHTBOX MODAL CONTAINER -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-bg-surface border border-border-subtle rounded-2xl max-w-xl w-full p-6 relative">
+      <button id="close-lightbox" class="absolute top-4 right-4 p-2 text-text-muted hover:text-white text-xl">✕</button>
+      <h3 id="lightbox-title" class="text-xl font-bold text-text-heading mb-2">Title</h3>
+      <p class="text-text-muted text-sm mb-4">Prinjau foto skala penuh & rincian metadata lokasi.</p>
+      <div id="lightbox-preview" class="w-full h-64 rounded-xl bg-gradient-to-br from-brand-900 to-slate-900 flex items-center justify-center text-white font-mono text-sm">
+        [ Photo Full View ]
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('lightbox-modal');
+    const closeBtn = document.getElementById('close-lightbox');
+    const titleEl = document.getElementById('lightbox-title');
+    const cards = document.querySelectorAll('[data-lightbox]');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const title = card.getAttribute('data-lightbox');
+        if (titleEl && modal) {
+          titleEl.textContent = title || '';
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        }
+      });
+    });
+
+    closeBtn?.addEventListener('click', () => {
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+    });
+  </script>
+</Layout>

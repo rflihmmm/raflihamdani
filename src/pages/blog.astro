@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogCard from '../components/BlogCard.astro';
+
+const blogPosts = [
+  {
+    title: "Membangun Web Super Cepat Menggunakan Astro 5 & Tailwind CSS v4",
+    excerpt: "Panduan mendalam memanfaatkan arsitektur Astro Islands, zero-JS by default, dan engine Tailwind CSS v4 terbaru yang menggunakan CSS variables natively.",
+    date: "24 Jul 2026",
+    readTime: "5 min baca",
+    category: "Web Development",
+    slug: "astro-tailwind-v4",
+    content: "Astro 5 membawa banyak peningkatan performa luar biasa, terutama ketika dipadukan dengan Tailwind CSS v4. Dalam artikel ini, kita akan membahas strategi penyusunan komponen UI, pembuatan tema dark mode tanpa jank (flash-of-unstyled-content), serta optimasi aset gambar secara otomatis."
+  },
+  {
+    title: "Resilient Error Handling Pada React & Component Error Boundaries",
+    excerpt: "Bagaimana menangani kegagalan API secara parsial tanpa membuat seluruh tampilan aplikasi crash, menggunakan strategi React ErrorBoundary.",
+    date: "12 Jul 2026",
+    readTime: "7 min baca",
+    category: "Frontend",
+    slug: "react-error-handling",
+    content: "Ketika aplikasi kompleks memanggil banyak endpoint API secara independen, kegagalan pada satu API tidak boleh menghentikan pengalaman pengguna secara menyeluruh. Kita akan mempelajari implementasi ErrorBoundary dan fallback state yang elegan."
+  },
+  {
+    title: "Optimasi Query Database PostgreSQL & Laravel Batching",
+    excerpt: "Teknik optimasi pencarian data pegawai skala besar, pembagian query terdistribusi, dan pencegahan memory leak saat ekspor data.",
+    date: "28 Jun 2026",
+    readTime: "6 min baca",
+    category: "Backend",
+    slug: "laravel-postgresql-optimization",
+    content: "Proses rekapitulasi data ASN sering kali terkendala jumlah baris data yang besar. Penggunaan `cursor()`, `chunk()`, dan perbaikan klausa `whereNotNull` membantu menjaga alokasi memori tetap hemat dan kecepatan query meningkat."
+  },
+  {
+    title: "Prinsip Desain UI Modern: Glassmorphism & Micro-animations",
+    excerpt: "Menghadirkan tampilan antarmuka yang wow dan terasa premium dengan penggunaan backdrop-blur, gradien subtle, dan efek hover yang responsif.",
+    date: "15 Jun 2026",
+    readTime: "4 min baca",
+    category: "UI/UX",
+    slug: "ui-glassmorphism-animations",
+    content: "Desain UI modern tidak hanya tentang warna mendasar, melainkan penciptaan hirarki visual yang harmonis. Efek glassmorphism dan mikro-animasi pada tombol memberikan respons visual yang memanjakan mata pengguna."
+  },
+  {
+    title: "Manajemen State & Architecture Pattern Pada Aplikasi Web Enterprise",
+    excerpt: "Struktur direktori, pemisahan layer data controller, dan pola modularisasi komponen untuk skalabilitas jangka panjang.",
+    date: "02 Jun 2026",
+    readTime: "8 min baca",
+    category: "Architecture",
+    slug: "enterprise-state-architecture",
+    content: "Menjaga kode tetap rapi dan mudah dirawat saat proyek berkembang memerlukan pola arsitektur yang konsisten. Pembahasan mengenai separation of concerns dan clean code pattern."
+  }
+];
+---
+
+<Layout title="Blog — Rafli Hamdani" activeNav="blog">
+  <div class="mb-12">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4">
+      📖 Catatan & Artikel
+    </div>
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-heading mb-4">
+      Tulisan Teknis & Jurnal
+    </h1>
+    <p class="text-text-muted text-lg leading-relaxed max-w-2xl">
+      Berbagi wawasan seputar rekayasa perangkat lunak, arsitektur web, pengalaman mengoptimalkan aplikasi, dan tips pengembangan.
+    </p>
+  </div>
+
+  <!-- FEATURED POST BANNER -->
+  <section class="mb-12">
+    <a
+      href={`#${blogPosts[0].slug}`}
+      class="group block rounded-3xl border border-brand-500/30 bg-gradient-to-br from-bg-surface via-bg-elevated/40 to-bg-surface p-6 sm:p-8 relative overflow-hidden shadow-xl hover:border-brand-500/60 transition-all duration-300"
+    >
+      <div class="absolute -right-16 -top-16 w-64 h-64 bg-brand-500/15 rounded-full blur-3xl group-hover:bg-brand-500/25 transition-all"></div>
+      
+      <div class="flex items-center gap-3 text-xs text-text-muted mb-4 font-mono">
+        <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 font-sans font-bold border border-brand-500/30">
+          Artikel Utama
+        </span>
+        <span>•</span>
+        <time>{blogPosts[0].date}</time>
+        <span>•</span>
+        <span>{blogPosts[0].readTime}</span>
+      </div>
+
+      <h2 class="text-2xl sm:text-3xl font-bold text-text-heading group-hover:text-brand-400 transition-colors mb-3">
+        {blogPosts[0].title}
+      </h2>
+
+      <p class="text-text-muted text-sm sm:text-base leading-relaxed mb-6 max-w-3xl">
+        {blogPosts[0].excerpt}
+      </p>
+
+      <div class="inline-flex items-center gap-2 text-sm font-semibold text-brand-400 group-hover:translate-x-1 transition-transform">
+        <span>Baca artikel selengkapnya</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+    </a>
+  </section>
+
+  <!-- POSTS GRID -->
+  <section class="mb-16">
+    <h2 class="text-xl font-bold text-text-heading mb-6">Artikel Lainnya</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {blogPosts.slice(1).map((post) => (
+        <BlogCard {...post} />
+      ))}
+    </div>
+  </section>
+
+  <!-- FULL ARTICLES MODAL / ANCHOR LIST -->
+  <section class="space-y-12 border-t border-border-subtle pt-12">
+    <h2 class="text-2xl font-bold text-text-heading mb-6">Detail Artikel</h2>
+    {blogPosts.map((post) => (
+      <article 
+        id={post.slug}
+        class="p-6 sm:p-8 rounded-2xl border border-border-subtle bg-bg-surface/50 scroll-mt-24"
+      >
+        <div class="flex items-center gap-3 text-xs text-text-muted mb-3 font-mono">
+          <span class="px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-400 font-sans font-medium border border-brand-500/20">
+            {post.category}
+          </span>
+          <span>•</span>
+          <time>{post.date}</time>
+          <span>•</span>
+          <span>{post.readTime}</span>
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-text-heading mb-4">
+          {post.title}
+        </h3>
+        <p class="text-text-muted text-sm sm:text-base leading-relaxed mb-4">
+          {post.content}
+        </p>
+        <div class="pt-4 border-t border-border-subtle/40 text-xs text-text-muted">
+          Penulis: <span class="text-text-heading font-semibold">Rafli Hamdani</span>
+        </div>
+      </article>
+    ))}
+  </section>
+</Layout>
