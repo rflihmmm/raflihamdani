@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import ProjectCard from '../components/ProjectCard.astro';
@@ -132,8 +133,8 @@ const photoHighlights = [
       <div class="relative group">
         <div class="absolute -inset-1 rounded-[2.5rem] bg-gradient-to-r from-brand-500 to-teal-400 opacity-30 blur-xl group-hover:opacity-60 transition duration-500"></div>
         <div class="relative w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-[2.2rem] overflow-hidden border-2 border-border-subtle shadow-2xl bg-bg-surface">
-          <img 
-            src={profileImg.src} 
+          <Image 
+            src={profileImg} 
             alt="Rafli Hamdani Profile" 
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
@@ -227,7 +228,7 @@ const photoHighlights = [
     />
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {photoHighlights.map((photo, idx) => (
+      {photoHighlights.map((photo) => (
         <a
           href="/photos"
           class="group relative h-64 rounded-2xl overflow-hidden border border-border-subtle bg-bg-surface flex flex-col justify-end p-5 transition-all duration-300 hover:border-brand-500/50 hover:shadow-xl hover:-translate-y-1"
