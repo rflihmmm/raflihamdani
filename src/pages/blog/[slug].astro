@@ -1,0 +1,99 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Intl.DateTimeFormat("en-US", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+}).format(post.data.pubDate);
+const dateTime = post.data.pubDate.toISOString().slice(0, 10);
+---
+
+<Layout
+  title={`${post.data.title} — Rafli Hamdani`}
+  description={post.data.excerpt}
+  activeNav="blog"
+>
+  <article class="max-w-3xl">
+    <a
+      href="/blog"
+      class="inline-flex items-center gap-2 text-sm font-medium text-brand-400 hover:text-brand-300 transition-colors mb-8"
+    >
+      <span aria-hidden="true">←</span>
+      <span>Back to blog</span>
+    </a>
+
+    <header class="mb-10">
+      <div
+        class="flex flex-wrap items-center gap-3 text-xs text-text-muted mb-4 font-mono"
+      >
+        <span
+          class="px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-400 font-sans font-medium border border-brand-500/20"
+        >
+          {post.data.category}
+        </span>
+        <span>•</span>
+        <time datetime={dateTime}>{formattedDate}</time>
+        <span>•</span>
+        <span>{post.data.readTime}</span>
+      </div>
+
+      <h1
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-heading mb-5 leading-tight"
+      >
+        {post.data.title}
+      </h1>
+
+      <p class="text-text-muted text-lg leading-relaxed">
+        {post.data.excerpt}
+      </p>
+
+      <div class="pt-6 mt-6 border-t border-border-subtle/40 text-xs text-text-muted">
+        Author:
+        <span class="text-text-heading font-semibold">{post.data.author}</span>
+      </div>
+    </header>
+
+    <div
+      class="prose-content text-text-muted text-base leading-relaxed space-y-5"
+    >
+      <Content />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .prose-content :global(h2) {
+    color: var(--text-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-top: 2rem;
+  }
+
+  .prose-content :global(p) {
+    margin: 0;
+  }
+
+  .prose-content :global(code) {
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.375rem;
+    background: var(--bg-elevated);
+    color: var(--text-heading);
+    font-size: 0.875em;
+    padding: 0.1rem 0.35rem;
+  }
+</style>

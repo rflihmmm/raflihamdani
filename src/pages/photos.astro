@@ -5,7 +5,7 @@ const photoGallery = [
   {
     id: "photo-1",
     title: "Geometry in Motion",
-    category: "Arsitektur",
+    category: "Architecture",
     location: "Jakarta Financial Center",
     camera: "Sony A7 IV • 35mm f/1.8",
     aspect: "h-72",
@@ -45,7 +45,7 @@ const photoGallery = [
   {
     id: "photo-5",
     title: "Symmetry of Modern Glass",
-    category: "Arsitektur",
+    category: "Architecture",
     location: "Menara BCA Tower",
     camera: "Fujifilm X-T4 • 16mm f/2.8",
     aspect: "h-80",
@@ -55,7 +55,7 @@ const photoGallery = [
   {
     id: "photo-6",
     title: "Solitude in the Forest",
-    category: "Minimalis",
+    category: "Minimalist",
     location: "Cikole Pine Forest",
     camera: "Sony A7 IV • 50mm f/1.4",
     aspect: "h-72",
@@ -64,19 +64,19 @@ const photoGallery = [
   }
 ];
 
-const categories = ["Semua", "Arsitektur", "Landscape", "Urban", "Minimalis"];
+const categories = ["All", "Architecture", "Landscape", "Urban", "Minimalist"];
 ---
 
 <Layout title="Photos — Rafli Hamdani" activeNav="photos">
   <div class="mb-12">
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-4">
-      📷 Galeri Fotografi
+      📷 Photo Gallery
     </div>
     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-heading mb-4">
-      Koleksi Foto & Momen
+      Photo Collection & Moments
     </h1>
     <p class="text-text-muted text-lg leading-relaxed max-w-2xl">
-      Eksplorasi estetika visual, pola arsitektur perkotaan, lanskap alam, dan cuplikan perspektif fotografi.
+      Exploring visual aesthetics, urban architectural patterns, natural landscapes, and photography perspectives.
     </p>
   </div>
 
@@ -153,7 +153,7 @@ const categories = ["Semua", "Arsitektur", "Landscape", "Urban", "Minimalis"];
     <div class="bg-bg-surface border border-border-subtle rounded-2xl max-w-xl w-full p-6 relative">
       <button id="close-lightbox" class="absolute top-4 right-4 p-2 text-text-muted hover:text-white text-xl">✕</button>
       <h3 id="lightbox-title" class="text-xl font-bold text-text-heading mb-2">Title</h3>
-      <p class="text-text-muted text-sm mb-4">Prinjau foto skala penuh & rincian metadata lokasi.</p>
+      <p class="text-text-muted text-sm mb-4">Full-size photo preview & location metadata details.</p>
       <div id="lightbox-preview" class="w-full h-64 rounded-xl bg-gradient-to-br from-brand-900 to-slate-900 flex items-center justify-center text-white font-mono text-sm">
         [ Photo Full View ]
       </div>
