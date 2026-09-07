@@ -2,6 +2,11 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import BlogCard from "../components/BlogCard.astro";
+import { features } from "../config/features";
+
+if (!features.blog) {
+  return Astro.rewrite("/404");
+}
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("en-US", {

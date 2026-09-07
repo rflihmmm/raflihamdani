@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+Astro.response.status = 404;
+---
+
+<Layout title="404 — Page Not Found | Rafli Hamdani">
+  <section class="flex min-h-0 flex-1 flex-col items-start justify-center">
+    <p class="mb-4 font-mono text-[50px] font-medium uppercase tracking-[0.24em] text-brand-400">
+      404
+    </p>
+    <h1 class="text-3xl font-bold tracking-[-0.03em] text-text-heading sm:text-4xl">
+      Page not found
+    </h1>
+    <p class="mt-4 max-w-md text-base leading-7 text-text-muted">
+      The page you're looking for doesn't exist or is currently unavailable.
+    </p>
+    <a
+      href="/"
+      class="mt-8 inline-flex items-center justify-center rounded-md bg-brand-500 px-5 py-3 text-sm font-medium text-white transition duration-200 hover:bg-brand-600 active:scale-[0.98]"
+    >
+      Back to Home
+    </a>
+  </section>
+</Layout>

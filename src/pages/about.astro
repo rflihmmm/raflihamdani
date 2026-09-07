@@ -2,6 +2,11 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import meImg from "../assets/me.jpg";
+import { features } from "../config/features";
+
+if (!features.about) {
+  return Astro.rewrite("/404");
+}
 
 const experiences = [
   {

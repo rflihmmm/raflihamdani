@@ -1,6 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { features } from '../config/features';
+
+if (!features.projects) {
+  return Astro.rewrite("/404");
+}
 
 const projectsList = [
   {

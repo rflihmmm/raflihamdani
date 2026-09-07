@@ -6,6 +6,7 @@ import ImagesIcon from "./icons/ImagesIcon.astro";
 import MoonIcon from "./icons/MoonIcon.astro";
 import SunIcon from "./icons/SunIcon.astro";
 import BookOpenIcon from "./icons/BookOpenIcon.astro";
+import { features } from "../config/features";
 
 interface Props {
   active?: "home" | "user" | "projects" | "blog" | "photos";
@@ -26,38 +27,45 @@ const getActiveItem = () => {
 
 const currentActive = getActiveItem();
 
-const navItems = [
+const allNavItems = [
   {
     id: "home",
     label: "Home",
     href: "/",
     IconComponent: HomeIcon,
+    enabled: true,
   },
   {
     id: "user",
     label: "Profile",
     href: "/about",
     IconComponent: UserIcon,
+    enabled: features.about,
   },
   {
     id: "projects",
     label: "Projects",
     href: "/projects",
     IconComponent: MonitorIcon,
+    enabled: features.projects,
   },
   {
     id: "blog",
     label: "Blog",
     href: "/blog",
     IconComponent: BookOpenIcon,
+    enabled: features.blog,
   },
   {
     id: "photos",
     label: "Photos",
     href: "/photos",
     IconComponent: ImagesIcon,
+    enabled: features.photos,
   },
 ];
+
+const navItems = allNavItems.filter((item) => item.enabled);
 ---
 
 <!-- Mobile Theme Toggle (Floating Bottom Right on mobile) -->
@@ -94,7 +102,7 @@ const navItems = [
             class:list={[
               "p-2.5 rounded-xl flex items-center justify-center transition-all duration-200 group relative focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:outline-none",
               isActive
-                ? "bg-base-white text-base-black shadow-md font-semibold scale-105"
+                ? "text-base-black font-semibold scale-105"
                 : "text-neutral-400 hover:text-neutral-100 hover:bg-neutral-800/40",
             ]}
           >
