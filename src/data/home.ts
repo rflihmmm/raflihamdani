@@ -1,12 +1,4 @@
-export interface FeaturedProject {
-  title: string;
-  description: string;
-  tags: string[];
-  code: string;
-  featured: boolean;
-  githubUrl: string;
-  demoUrl: string;
-}
+import { projectsList } from '../config/projects';
 
 export interface FeaturedPost {
   title: string;
@@ -24,35 +16,7 @@ export interface PhotoHighlight {
   tone: string;
 }
 
-export const featuredProjects: FeaturedProject[] = [
-  {
-    title: "HRIS & ASN Enterprise Recap",
-    description: "Real-time civil servant data management and recap system with distributed database integration and dynamic report exports.",
-    tags: ["Laravel", "PostgreSQL", "PHP 8", "DataTables"],
-    code: "01",
-    featured: true,
-    githubUrl: "https://github.com",
-    demoUrl: "https://example.com"
-  },
-  {
-    title: "AI Topic Insights Dashboard",
-    description: "AI analytics dashboard for topic extraction, keyword processing, and resilient error-boundary data visualization.",
-    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
-    code: "02",
-    featured: false,
-    githubUrl: "https://github.com",
-    demoUrl: "https://example.com"
-  },
-  {
-    title: "Astro Modern Portfolio",
-    description: "Ultra-fast portfolio site built with Astro 5, Tailwind CSS 4, and a modular component architecture.",
-    tags: ["Astro", "Tailwind v4", "TypeScript"],
-    code: "03",
-    featured: false,
-    githubUrl: "https://github.com",
-    demoUrl: "https://example.com"
-  }
-];
+export const featuredProjects = projectsList.filter((project) => project.highlighted);
 
 export const featuredPosts: FeaturedPost[] = [
   {
