@@ -23,7 +23,7 @@ if (!features.projects) {
   <!-- PROJECTS GRID -->
   <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-6" style="--index: 1">
     {projectsList.map((project) => (
-      <ProjectCard {...project} />
+      <ProjectCard {...project} class="reveal" />
     ))}
   </div>
 </Layout>

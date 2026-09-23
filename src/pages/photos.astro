@@ -92,7 +92,7 @@ const categories = ["All", "Architecture", "Landscape", "Urban", "Minimalist"];
         type="button"
         class:list={[
           "px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border cursor-pointer",
-          idx === 0 
+          idx === 0
             ? "bg-brand-500 text-white border-brand-500 shadow-md shadow-brand-500/20"
             : "bg-bg-surface border-border-subtle text-text-muted hover:text-text-heading hover:bg-bg-elevated"
         ]}
@@ -107,7 +107,7 @@ const categories = ["All", "Architecture", "Landscape", "Urban", "Minimalist"];
     {photoGallery.map((photo) => (
       <div
         class:list={[
-          "group relative rounded-2xl overflow-hidden border bg-bg-surface flex flex-col justify-end p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer",
+          "reveal group relative rounded-2xl overflow-hidden border bg-bg-surface flex flex-col justify-end p-6 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer",
           photo.aspect,
           photo.accent
         ]}
@@ -115,10 +115,10 @@ const categories = ["All", "Architecture", "Landscape", "Urban", "Minimalist"];
       >
         <!-- Background Mock Visual -->
         <div class={`absolute inset-0 bg-gradient-to-br ${photo.gradient} opacity-90 group-hover:scale-110 transition-transform duration-700`}></div>
-        
+
         <!-- Grid Pattern Overlay -->
         <div class="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px] opacity-10"></div>
-        
+
         <!-- Bottom Vignette -->
         <div class="absolute inset-0 bg-gradient-to-t from-bg-page via-bg-page/40 to-transparent"></div>
 
@@ -127,7 +127,7 @@ const categories = ["All", "Architecture", "Landscape", "Urban", "Minimalist"];
           <span class="inline-block px-2.5 py-0.5 rounded-full bg-brand-500/20 text-brand-300 text-[11px] font-mono font-medium mb-2 border border-brand-500/30">
             {photo.category}
           </span>
-          
+
           <h3 class="text-xl font-bold text-white group-hover:text-brand-300 transition-colors mb-1">
             {photo.title}
           </h3>
